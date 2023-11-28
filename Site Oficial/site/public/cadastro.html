@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="shortcut icon" href="assets/icon/swoosh.ico">
+  <link rel="stylesheet" href="css/stylecadastro.css">
+  <script src="./js/sessao.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <li>
+        &nbsp;&nbsp;Nike <br>
+        History
+      </li>
+      <img id="imgSwooshWhite" src="assets/imgs/swoosh.png" alt="nikeswoosh">
+      <ul>
+        <li id="menu">
+          <a href="index.html">
+            HOME
+          </a>
+
+        </li>
+        <li id="traco">
+          &nbsp;|&nbsp;
+        </li>
+        <li id="menu">
+          <a href="quiz.html">
+            QUIZ
+          </a>
+        </li>
+        <li id="traco">
+          &nbsp;|&nbsp;
+        </li>
+        <li id="menu">
+          <a href="grafico.html">
+           DASHBOARD 
+          </a>
+          
+        </li>
+        <li id="traco">
+          &nbsp;|&nbsp;
+        </li>
+        <li id="menu">
+          <a href="Sobre_a_ONU.html">
+            SOBRE&nbsp;A&nbsp;ONU
+          </a>
+
+        </li>
+        <li id="traco">
+          &nbsp;|&nbsp;
+        </li>
+        <li id="menu">
+          <a href="cadastro.html">
+            <b>CADASTRO</b>
+          </a>
+
+        </li>
+        <li id="traco">
+          &nbsp;|&nbsp;
+        </li>
+        <li id="menu">
+          <a href="login.html">
+            LOGIN
+          </a>
+
+        </li>
+      </ul>
+    </div>
+    <div class="cadastro">
+      <div class="container1">
+        <div class="card">
+          <h4 id="CADASTRO">
+            CADASTRO
+          </h4>
+          <div class="formulario">
+            <div class="campo">
+              <span id="nome">
+                NOME: <br>
+              </span>
+              <input type="text" id="input_nome" style="text-align: center;" placeholder="Seu Nome">
+            </div>
+            <div class="campo">
+              <span id="cpf">
+                CPF: <br>
+              </span>
+              <input type="text" id="input_cpf" style="text-align: center;" placeholder="00000000000">
+            </div>
+            <div class="campo">
+              <span id="email">
+                E-MAIL: <br>
+              </span>
+              <input type="email" id="input_email" style="text-align: center;" placeholder="exemplo@gmail.com">
+            </div>
+            <div class="campo">
+              <span id="senha">
+                SENHA: <br>
+              </span>
+              <input type="password" id="input_senha" style="text-align: center;" placeholder="********">
+            </div>
+            <div class="campo">
+              <span id="ConfirmacaoSenha">
+                CONFIRMAÇÃO DE SENHA: <br>
+              </span>
+              <input type="password" id="input_confirmacao_senha" style="text-align: center;" placeholder="********">
+            </div> <br>
+            <button onclick="cadastrar()">
+              CADASTRAR
+            </button>
+          </div>
+        </div>
+      </div>
+      <h4 id="conteudo">
+        GOSTOU&nbsp;DO&nbsp;CONTEUDO?&nbsp;<br>CADASTRE&nbsp;-&nbsp;SE&nbsp;E&nbsp;CONFIRA&nbsp;<br>ALGUMAS&nbsp;ESTÁSTISTICAS
+      </h4>
+      <img id="move" src="assets/imgs/Move_to_zero-removebg-preview.png" alt="movetozero">
+    </div>
+</body>
+
+</html>
+<script>
+  function cadastrar() {
+
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_nome.value;
+    var cpfVar = Number(input_cpf.value);
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+    var confirmacaoSenhaVar = input_confirmacao_senha.value;
+
+    if (nomeVar == "" &&
+      cpfVar == "" ||
+      emailVar == "" ||
+      senhaVar == "") {
+      alert("Mensagem de erro para todos os campos em branco")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Mensagem de erro para todos os campos em branco)";
+
+
+      return false;
+    } else if (nomeVar.length < 1) {
+      alert(`"O campo "Nome" precisa conter algum caracter"`)
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   `(O campo "Nome" precisa conter algum caracter )`;
+
+
+      return false;
+
+    } else if (cpfVar.length <= 10) {
+      alert("CPF precisa conter 11 digitos")
+      //     cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(CPF precisar conter 11 digitos)";
+
+
+      return false;
+
+    } else if (emailVar.indexOf("@") < 1 || emailVar.indexOf(".") < 1) {
+      alert(`O email precisa conter "@" e "."`)
+      //     cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   `(O email precisa conter "@" e ".")`;
+
+
+      return false;
+
+    } else if (senhaVar.length <= 5) {
+      alert("A senha precisa conter pelo menos 6 digitos")
+      //     cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(A senha precisa conter pelo menos 6 digitos)";
+
+
+      return false; ""
+
+    } else if (confirmacaoSenhaVar != senhaVar) {
+      alert("Confirmação de Senha errada")
+      //     cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Confirmação de Senha errada)";
+
+
+      return false;
+    } else {
+      alert("Cadastro efetuado com sucesso")
+      // setInterval(sumirMensagem, 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        cpfServer: cpfVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          // cardErro.style.display = "block";
+
+           
+            alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      // .catch(function (resposta) {
+      //   console.log(`#ERRO: ${resposta}`);
+
+      // });
+
+    return false;
+  }
+
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  
+</script>

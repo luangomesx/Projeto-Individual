@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/grafico.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./js/sessao.js"></script>
+</head>
+
+<body style="display: flex;" onload="validarSessao()">
+
+  <div>
+    <canvas id="myChart"
+      style="position: relative; height:35vh; width:35vw; margin-left: 280px; margin-top: 330px;"></canvas>
+  </div>
+
+  <div class="grafico">
+    <header>
+      <img src="" alt="">
+      <h1>DASHBOARD QUIZ</h1>
+    </header>
+    <canvas id="myChart2"
+      style="position: relative; height:35vh; width:35vw; margin-left: 80px; margin-top: 250px;"></canvas>
+  </div>
+
+</body>
+
+<div class="menu">
+  <li id="nikeHistory">
+    &nbsp;&nbsp;Nike <br>
+    History
+  </li>
+  <img id="swoosh" src="assets/imgs/swoosh.png" alt="">
+  <div id="hello">
+    <h2 id="ola">&nbsp;&nbsp;&nbsp;Olá, <span id="usuarioPerfil"><br>usuário</span></h2>
+  </div>
+  <ul>
+    <img id="home" src="assets/imgs/silhueta-de-icone-de-casa.png" alt="">
+    <li id="ul1"><a href="index.html">Home</a></li><br>
+  </ul>
+  <ul>
+    <img id="barras" src="assets/imgs/grafico-de-barras.png" alt="">
+    <li id="ul2"><a href="grafico.html">Geral</a></li><br>
+  </ul>
+
+  <a href="index.html"><img id="img2" src="assets/imgs/opcao-de-sair.png" alt=""></a>
+  <!-- <ul id="log_out">
+        <a  href="">Log Out</a>
+    </ul> -->
+</div>
+
+<!-- <h2>&nbsp;&nbsp;&nbsp;Olá <br> Usuário</h2> -->
+<script>
+
+  var label1 = []
+  var dados1 = []
+
+  function grafico1() {
+    fetch(`/grafico/usuariosMediaAcima`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Erro na solicitação: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(res => {
+       console.log(res)
+        for (i = 0; i < res.length; i++) {
+          label1.push(res[i].qtdusuario);
+          dados1.push(res[i].resultado);
+        }
+        setTimeout(()=> {
+          plotarGrafico1()
+        },10)
+      })
+      .catch(error => {
+        console.error("Error no lado do cliente:", error);
+      });
+
+  }
+  grafico1()
+
+ function plotarGrafico1() {
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: label1,
+      datasets: [{
+        label: 'Pessoas com Pontuação da Média pra cima',
+        data: dados1,
+        borderWidth: 3,
+      }
+      ]
+    },
+
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+ }
+
+</script>
+<script>
+  var label2 = []
+  var dados2 = []
+
+
+  function grafico2() {
+    fetch(`/grafico/usuariosMediaAbaixo`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Erro na solicitação: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(res => {
+       console.log(res)
+        for (i = 0; i < res.length; i++) {
+          label2.push(res[i].qtdusuario);
+          dados2.push(res[i].resultado);
+        }
+        setTimeout(()=> {
+          plotarGrafico2()
+        },10)
+      })
+      .catch(error => {
+        console.error("Error no lado do cliente:", error);
+      });
+  }
+  grafico2()
+
+  function plotarGrafico2() {
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: label2,
+        datasets: [{
+          label: 'Pessoas com Pontuação da Média pra baixo',
+          borderColor: 'red',
+          data: dados2,
+          borderWidth: 3
+        }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+</script>
+
+<div class="container">
+  <div class="card">
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usuários <br> Acima da Média </h3>
+    <div class="kpi">
+      <!-- <img src="termometro.png" alt=""> -->
+      <h4 id="acima"> 0 </h4>
+    </div>
+
+  </div>
+  <div class="card2">
+    <h3>Usuários <br> Na Média</h3>
+    <div class="kpi">
+      <!-- <img src="umidade.png" alt=""> -->
+      <h4 id="media">0</h4>
+    </div>
+
+  </div>
+  <div class="card3">
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usuarios <br> Abaixo da Média</h3>
+    <div class="kpi"></div>
+    <!-- <img src="alerta.png" alt=""> -->
+    <h4 id="abaixo">0</h4>
+  </div>
+
+</div>
+
+</html>
+<script>
+  usuarioPerfil.innerHTML = sessionStorage.NOME_USUARIO;
+  var acima = document.getElementById("acima");
+  var media = document.getElementById("media");
+  var abaixo = document.getElementById("abaixo");
+  var id = sessionStorage.ID_USUARIO;
+  var qtdTotal = 0
+  console.log(id);
+
+  setInterval(mostrarAcima, 3000);
+  function mostrarAcima() {
+
+    fetch(`grafico/acimaDaMedia?idUsuario=${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        }
+      })
+
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Erro na solicitação: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(res => {
+        qtdTotal = res[0].qtdUsuarios;
+
+        acima.innerHTML = `${qtdTotal}`;
+
+
+      })
+      .catch(error => {
+        console.error("Error no lado do cliente:", error);
+      });
+
+  }
+
+  setInterval(naMedia, 3000);
+  function naMedia() {
+
+    fetch(`grafico/naMedia?idUsuario=${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        }
+      })
+
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Erro na solicitação: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(res => {
+        qtdTotal = res[0].qtdUsuarios;
+
+        media.innerHTML = `${qtdTotal}`;
+
+
+      })
+      .catch(error => {
+        console.error("Error no lado do cliente:", error);
+      });
+
+  }
+
+  setInterval(emAbaixo, 3000);
+  function emAbaixo() {
+
+    fetch(`grafico/emAbaixo/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        }
+      })
+
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Erro na solicitação: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(res => {
+        qtdTotal = res[0].qtdUsuarios;
+
+        abaixo.innerHTML = `${qtdTotal}`;
+
+
+      })
+      .catch(error => {
+        console.error("Error no lado do cliente:", error);
+      });
+
+  }
+
+
+</script>

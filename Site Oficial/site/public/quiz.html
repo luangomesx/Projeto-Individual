@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="shortcut icon" href="assets/icon/swoosh.ico">
+    <link rel="stylesheet" href="css/stylequiz.css">
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao()">
+    <div class="header">
+        <div class="container">
+            <li>
+                &nbsp;&nbsp;Nike <br>
+                History
+            </li>
+            <img id="imgSwooshWhite" src="assets/imgs/swoosh.png" alt="nikeswoosh">
+            <ul>
+                <li id="menu">
+                    <a href="index.html">
+                        HOME
+                    </a>
+
+                </li>
+                <li id="traco">
+                    &nbsp;|&nbsp;
+                </li>
+                <li id="menu">
+                    <a href="quiz.html">
+                        <b>QUIZ</b>
+                    </a>
+                </li>
+                <li id="traco">
+                    &nbsp;|&nbsp;
+                </li>
+                <li id="menu">
+                    <a href="grafico.html">
+                        DASHBOARD
+                    </a>
+
+                </li>
+                <li id="traco">
+                    &nbsp;|&nbsp;
+                </li>
+                <li id="menu">
+                    <a href="Sobre_a_ONU.html">
+                        SOBRE&nbsp;A&nbsp;ONU
+                    </a>
+
+                </li>
+                <li id="traco">
+                    &nbsp;|&nbsp;
+                </li>
+                <li id="menu">
+                    <a href="cadastro.html">
+                        CADASTRO
+                    </a>
+
+                </li>
+                <li id="traco">
+                    &nbsp;|&nbsp;
+                </li>
+                <li id="menu">
+                    <a href="login.html">
+                        LOGIN
+                    </a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h3 id="titulo1">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com os conteúdos da Home que voce viu <br>
+        Topa responder algumas perguntas? Então bora lá...
+    </h3>
+    <h3 id="titulo2">
+        responda esse Quiz e veja a sua pontuação...
+    </h3>
+    <div class="meio">
+        <div class="container1">
+            <div class="formulario">
+                <div id="pergunta">
+                    <h3 id="titulo3">
+                        VAMOS PARA AS PERGUNTAS...
+                    </h3> <br>
+                    <button onclick="comecarQuiz()">
+                        <b>COMEÇAR</b>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="meio2">
+        <div class="container2">
+            <div class="formulario1">
+                <h3 id="titulo4">
+                    PONTUAÇÃO
+                </h3><br>
+                <h3 id="titulo5">
+                    ACERTOS: <span id="acertos" style="color: #fff; margin-left: 230px;">0</span>
+                </h3><br>
+                <h3 id="titulo6">
+                    ERROS: <span id="erros" style="color: #fff; margin-left: 252px;">0</span>
+                </h3><br>
+                <h3 id="titulo7">
+                    TOTAL DE PONTOS: <span id="total_pontos"
+                        style="color: #fff; margin-left: 330px; margin-top: 20px; margin: 100px;">0</span>
+                </h3>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var listaPerguntas = [`<h3 style="margin-left: -35px; margin-top: -25px";>1- A Nike foi fundada na década de 1960 em um momento de crescente interesse em atividades esportivas nos Estados Unidos.</h3>`,
+        `<h3 style="margin-left: -35px; margin-top: -25px";>2- A primeira linha de tênis assinada por Michael Jordan, chamada "Air Jordan 1", foi lançada em 1985.</h3>`, `<h3 style="margin-left: -35px; margin-top: -40px;">3- A NBA multou Michael Jordan sempre que ele usava os tênis Air Jordan 1 em quadra por não estarem em conformidade com as diretrizes de uniforme da liga.</h3>`,
+        `<h3 style="margin-left: -30px; margin-top: -25px";>4- A sede mundial da Nike, conhecida como "Nike World Headquarters", está localizada em Portland, Oregon.</h3>`,
+        `<h3 style="margin-left: -10px; margin-top: -25px";>5- Roger Federer é uma das personalidades mencionadas como patrocinadas pela Nike.</h3>`]
+
+    var listaRespostas = [
+        [' VERDADEIRO', ' FALSO'],
+        [' VERDADEIRO', ' FALSO'],
+        [' VERDADEIRO', ' FALSO'],
+        [' VERDADEIRO', ' FALSO'],
+        [' VERDADEIRO', ' FALSO']
+    ];
+
+    var listaGabarito = [1, 1, 1, 1, 0];
+
+    var listaAcertos = [];
+    var listaErros = [];
+
+    var perguntaAtual = 0;
+    var acerto = 0;
+    var erro = 0;
+
+    function comecarQuiz() {
+
+        pergunta.innerHTML = `${listaPerguntas[perguntaAtual]}
+            <button id="botao1" onclick="verificarResposta(1)" style="margin-top: 10px">VERDADEIRO</button> <br> <br>
+            <button id="botao0" onclick="verificarResposta(0)">FALSO</button>`;
+    }
+
+    function verificarResposta(resposta, botao) {
+
+        if (resposta == listaGabarito[perguntaAtual]) {
+
+            acerto += 1;
+
+
+        } else {
+
+            erro += 1;
+
+        }
+
+        if (listaPerguntas[perguntaAtual] > 5) {
+            alert("recomeçe o quiz")
+        }
+
+
+        setTimeout(function () {
+            listaAcertos.push(acerto);
+            listaErros.push(erro);
+
+            perguntaAtual += 1;
+
+            if (perguntaAtual < listaPerguntas.length) {
+                comecarQuiz();
+            } else {
+
+                total_pontos.innerHTML = `${acerto * 20} <button onclick="recomecarQuiz()" style="margin-top: 20px">Recomeçar</button>`;
+
+            }
+
+            if (perguntaAtual == listaPerguntas.length) {
+                cadastrar()
+                pergunta.innerHTML = `<p id="pontuacao"><b style="margin-left: -10px; font-size: 18px">CONFIRA AGORA A SUA PONTUAÇÂO</b></P>`
+
+            }
+
+            acertos.innerHTML = acerto;
+            erros.innerHTML = erro;
+
+        }, 500);
+    }
+
+
+    // function resetarCoresBotoes() {
+
+    //     botao1.style.backgroundColor = "";
+    //     botao0.style.backgroundColor = "";
+    // }
+
+
+    function recarregarPagina() {
+        location.reload()
+    }
+
+
+    function recomecarQuiz() {
+
+        perguntaAtual = 0;
+        acertos.innerHTML = 0
+        erros.innerHTML = 0
+        total_pontos.innerHTML = 0
+        recarregarPagina()
+    }
+
+    function cadastrar() {
+
+        var resultado = acerto * 20;
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+
+
+        fetch("/quiz/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                resultadoServer: resultado,
+                idUsuarioServer: idUsuario
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                    })
+
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+
+
+
+    }
+
+
+
+
+
+</script>

@@ -1,0 +1,365 @@
+ body {
+     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+     background-color: #000;
+     margin: 0;
+     overflow-x: hidden;
+ }
+
+ html::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+ }
+
+ html::-webkit-scrollbar-track {
+    background: transparent;
+    padding: 2px;
+ }
+
+ html::-webkit-scrollbar-thumb {
+    background-color: #fff;
+ }
+
+ .header {
+     height: 650px;
+ }
+
+ .header::before {
+     content: "";
+     position: absolute;
+     inset: 0;
+     background-image: url(zyro-image.png);
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     opacity: 25%;
+     z-index: -1;
+ }
+
+
+ .header .container {
+     width: 90%;
+     margin: auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .header .container ul {
+     width: 400px;
+     list-style: none;
+     display: flex;
+     justify-content: space-evenly;
+     color: #fff;
+ }
+
+ ul {
+     margin-right: 20px;
+ }
+
+ #menu {
+     display: inline-block;
+     position: relative;
+     text-decoration: none;
+     color: #fff;
+     list-style: none;
+     margin-top: 0px;
+     cursor: pointer;
+ }
+
+ a {
+     text-decoration: none;
+     color: #fff;
+ }
+
+ li {
+     color: #fff;
+     list-style: none;
+     margin-top: -20px;
+ }
+
+ #menu:hover {
+     border-bottom: 2px solid #fff;
+ }
+
+ #traco {
+     margin-top: 0;
+ }
+
+
+ #imgSwooshWhite {
+     width: 80px;
+     margin-top: 50px;
+     margin-left: -755px;
+ }
+
+ #titulo1 {
+    font-size: 18px;
+ }
+
+ #titulo1 li {
+     margin-top: 70px;
+     margin-left: 400px;
+ }
+
+ .social {
+     margin-top: 195px;
+     padding: 10px;
+     display: flex;
+     width: 500px;
+     height: 250px;
+     margin-left: 750px;
+ }
+
+ /* .container1 {
+    background-color: rgba(000, 0, 0, 0.8);
+    border-radius: 23px;
+} */
+
+ .card #sobreanike {
+     margin-left: 200px;
+ }
+
+ .card #paragrafo1 {
+     margin-left: 5px;
+ }
+
+ .card {
+     color: #fff;
+     font-size: 15px;
+     height: 30px;
+ }
+
+ .banner {
+     margin-left: 100px;
+     color: #fff;
+ }
+
+ .container2 {
+     text-align: justify;
+ }
+
+ .container2 #airjordan {
+     margin-left: 270px;
+ }
+
+ .container2 #jordan {
+     margin-top: 50px;
+ }
+
+ #MichaelJordan {
+     margin-left: 790px;
+     margin-top: -300px;
+     width: 400px;
+    
+ }
+ 
+ .patrocinio {
+     color: #fff;
+     display: flex;
+     justify-content: center;
+     margin-left: -80px;
+     margin-top: 30px;
+ }
+
+ #c {
+     position: absolute;
+     top: 50%;
+     width: 800px;
+     height: 200px;
+     left: 50%;
+     margin-left: -400px;
+     margin-top: -130px;
+ }
+
+ #c #pessoas {
+     width: 25%;
+     list-style-type: none;
+     position: absolute;
+     top: 0;
+     padding: 20px;
+     height: 200px;
+     opacity: 0;
+     padding-top: 40px;
+     text-align: center;
+     transition: 1s opacity;
+ }
+
+ .active {
+     opacity: 1;
+ }
+
+ #paragrafo2 {
+     font-size: 15px;
+     color: #fff;
+     line-height: 1.5em;
+ }
+
+ strong {
+     color: #fff;
+     font-weight: 700;
+     font-size: 60px;
+     line-height: 100px;
+ }
+
+ &white-gradient {
+     background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+ }
+
+
+ @keyframes scroll {
+     0% {
+         transform: translateX(0);
+     }
+
+     50% {
+         transform: translateX(calc(-250px * 8.8))
+     }
+ }
+
+
+ .slider {
+     background: rgb(0, 0, 0);
+     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+     height: 300px;
+     margin: auto;
+     overflow: hidden;
+     position: relative;
+     width: 1335px;
+     margin-left: -93px;
+     margin-top: 40px;
+
+     &::before,
+     &::after {
+         content: "";
+         height: 100px;
+         position: absolute;
+         width: 200px;
+         z-index: 2;
+     }
+
+     &::after {
+         right: 0;
+         top: 0;
+         transform: rotateZ(180deg);
+     }
+
+     &::before {
+         left: 0;
+         top: 0;
+     }
+
+     .slide-track {
+         animation: scroll 30s linear infinite;
+         display: flex;
+         width: calc(250px * 14);
+         justify-content: space-around;
+         margin: 20px;
+     }
+
+     .slide {
+         height: -50px;
+         width: -20px;
+     }
+ }
+
+ #nomes {
+     margin-top: 25px;
+     margin-left: 50px;
+ }
+
+ #pessoasP {
+    transition: all 0.3s ease;
+ }
+
+ #pessoasP:hover {
+     transform: scale(1.1);
+ }
+
+ .social1 {
+     margin-top: 50px;
+     height: 300px;
+ }
+
+ /* .container4 {
+    background-color: #6b6b6b;
+    border-radius: 23px;
+    width: 1100px;
+    height: 300px;
+    margin-left: 20px;
+    opacity: 30%;
+} */
+
+ #sobreasede {
+     margin-left: 280px;
+     margin-top: 80px;
+ }
+
+ .card1 {
+     color: #fff
+ }
+
+ #paragrafo2 {
+     color: #fff;
+     margin-top: 40px;
+
+ }
+
+ #sede {
+     width: 420px;
+     height: 250px;
+     margin-left: 720px;
+     margin-top: -240px;
+     /* border-radius: 23px; */
+     /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); */
+ }
+
+ .footer {
+     height: 200px;
+     width: 100%;
+     background-color: #555555;
+ }
+
+ .footer .container5 .version {
+     font-size: 12px;
+     font-weight: 800;
+ }
+
+ #evolucao {
+     display: flex;
+     justify-content: center;
+     color: #fff;
+     margin-top: 50px;
+ }
+
+ .version {
+     display: flex;
+     justify-content: center;
+     color: #fff;
+     margin-top: -10px;
+
+ }
+
+ #logo {
+     height: 100px;
+     margin-left: 120px;
+     margin-top: -20px;
+ }
+
+ #logo2 {
+     height: 100px;
+     width: 150px;
+     margin-left: 50px;
+ }
+
+
+ .footer {
+     background: linear-gradient(to top, #555555, transparent 90%);
+     width: 100%;
+     height: 70%;
+ }
+#hello {
+    color: #fff;
+    margin-left: 600px;
+    margin-top: -85px;
+    display: none;
+}

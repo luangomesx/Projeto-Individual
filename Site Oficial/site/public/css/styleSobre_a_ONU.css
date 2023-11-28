@@ -1,0 +1,101 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    background-color: #161616;
+}
+
+.header {
+    height: 100px;
+    background-color: #000;
+    margin: 0px, 0px, 3px, 0px;
+
+}
+
+.header .container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .container ul {
+    width: 400px;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    color: #fff;
+}
+
+ul {
+    margin-right: 20px;
+}
+
+#menu {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    list-style: none;
+    margin-top: 0px;
+    cursor: pointer ;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+li{
+    color: #fff;
+    list-style: none;
+    margin-top: -20px;
+}
+
+#menu:hover {
+    border-bottom: 2px solid #fff;
+}
+
+#traco {
+    margin-top: 0;
+}
+
+#imgSwooshWhite {
+    width:80px;
+    margin-top: 50px;
+    margin-left: -770px;
+}
+
+#nikeesaude {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+#paragrafo1 {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+#swoosh {
+    margin-top: -20px;
+    margin-left: 270px;
+}
+
+#adicao {
+    margin: 110px;
+    margin-left: -20px;
+}
+
+#ONU {
+    margin: 45px;
+    margin-left: -20px;
+}
+
+.header {
+    background: linear-gradient(to bottom, #000, transparent 90%); 
+    width: 100%;
+    height: 70%;
+}
